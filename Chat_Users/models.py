@@ -6,8 +6,8 @@ from django.contrib.auth.models import AbstractUser
 """Для модели нашего юзера наследуем юзера из коробки жанги"""
 class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
+    first_name = models.CharField(max_length=30, blank=False)
+    last_name = models.CharField(max_length=30, blank=False)
     friends = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
