@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
 
-"""Модели - объекты с помощью которых можно программно взаимодействовать с базой данных
-С помощью модели юзера мы можем добавлять данные о юзерах в таблицу юзеров в бд"""
-
-class User(models.Model):
-    firstname = models.CharField(max_length=20)
-    surname = models.CharField(max_length=20)
-    password = models.CharField()
-    email = models.EmailField(max_length=30)
-    date_joined = models.DateTimeField(auto_now_add=True)
+"""Для модели нашего юзера наследуем юзера из коробки жанги"""
+class User(AbstractUser):
+    username = models.CharField(max_length=30, unique=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    friends = models.ManyToManyField("self", blank=True)
 
     def __str__(self):
-        return str(User.firstname)
+        if str(self.first_name) == '' or str(self.last_name) == '':
+            return str(self.username)
+        else:
+            return str(self.first_name) + ' ' + str(self.last_name)
