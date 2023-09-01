@@ -14,4 +14,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return request.user.username == obj.username or request.user.is_staff
+        return obj.id == request.user.id or request.user.is_staff

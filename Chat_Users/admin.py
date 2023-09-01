@@ -7,16 +7,13 @@ from django.contrib.auth.models import Group
 class Admin(UserAdmin):
     #т.к. админка кастомная - в нее добавляем наши новые поля (только друзья пока что)
     add_fieldsets = (
-        (None, {
-            'Classes': ('wide',),
-            'Fields': ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_staff')}
-         ),
+        ('Info', {'fields': ('username', 'first_name', 'last_name', 'password1', 'password2', 'is_staff')}),
     )
 
     fieldsets = (
-        (None, {'fields': ('username', 'first_name', 'last_name', 'password', 'is_staff')}),
+        ("ADASD", {'fields': ('username', 'first_name', 'last_name', 'password', 'is_staff')}),
         ('Info', {'fields': ('email', 'date_joined')}),
-        ('Permissions', {'fields': ('is_active', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Permissions', {'fields': ('is_active', 'is_superuser', 'user_permissions')}),
         ('Friends', {'fields': ('friends', )})
     )
 
