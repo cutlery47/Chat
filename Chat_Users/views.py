@@ -4,8 +4,6 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from .serializers import UserSerializer
 from .permissions import IsOwnerOrReadOnly
-from .permissions import IsAdminOrReadOnly
-from django.contrib.auth.models import Group
 from django import http
 
 #check that the user exists (for the single user view)

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'Chat_Users',
+    'Chat_Messages',
     'djoser',
 ]
 
