@@ -9,9 +9,11 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30, blank=False)
     last_name = models.CharField(max_length=30, blank=False)
     friends = models.ManyToManyField("self", blank=True)
+    chats = models.ManyToManyField("Chat_Messages.Chat", blank=True)
 
     def __str__(self):
         if str(self.first_name) == '' or str(self.last_name) == '':
             return str(self.username)
-        else:
-            return str(self.first_name) + ' ' + str(self.last_name)
+        return str(self.first_name) + ' ' + str(self.last_name)
+
+
