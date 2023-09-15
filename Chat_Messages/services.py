@@ -41,12 +41,16 @@ def getMessages(request, check_object_permissions, chat_id):
     # get all the message with the current chat_id from the database
     messages = Message.objects.filter(chat_id=chat_id)
 
-    # serialize each message and add it to the json response
-    response = []
-    for msg in messages:
-        response.append(MessageSerializer(msg).data)
+    # we'll be returning a hashmap for easier data retrieval on the frontend
+    # the only value of a hashmap is an array of messages
+    return_messages = {'messages': None}
+    chat_messages = []
 
-    return Response(response)
+    for msg in messages:
+        chat_messages.append(MessageSerializer(msg).data)
+
+    return_messages['messages'] = chat_messages
+    return Response(return_messages)
 
 def sendMessages(request, check_object_permissions, chat_id):
     # check if chat exists

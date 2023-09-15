@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import User
+from .models import UserPost
 from django.contrib.auth.admin import UserAdmin
 
 #создаю кастомную админку для работы с юзерами
@@ -18,3 +19,4 @@ class UsrAdmin(UserAdmin):
 
 # Register your models here.
 admin.site.register(User, UsrAdmin)
+admin.site.register(UserPost)
