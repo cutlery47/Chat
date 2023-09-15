@@ -7,6 +7,9 @@ class Chat(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        db_table = "Chats"
+
 class Message(models.Model):
     first_name = models.CharField(blank=True)
     last_name = models.CharField(blank=True)
@@ -17,4 +20,6 @@ class Message(models.Model):
     def __str__(self):
         return str(self.message)
 
+    class Meta:
+        db_table = "Messages"
 

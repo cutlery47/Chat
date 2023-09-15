@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from .models import UserPost
 from django.contrib.auth.models import Group
 
 # можно наверное использовать дефолтные сериализаторы
@@ -23,10 +24,24 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance
 
-    #called when making a POST-request
+    # called when making a POST-request
     def create(self, validated_data):
+        # new user doesn't have any of these attributes
+        # actually a hack -- needs to be fixed
+        validated_data.pop('groups')
+        validated_data.pop('user_permissions')
+        validated_data.pop('friends')
+        validated_data.pop('chats')
+
+        # makes user active upon creating an instance
+        validated_data['is_active'] = True
         new_user = User.objects.create_user(**validated_data)
         return new_user
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPost
+        fields = "__all__"
 
 
 # 1) Сериализатор конвертирует жанговские модели и куерисеты в норальные форматы (например, жсон)

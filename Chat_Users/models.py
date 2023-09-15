@@ -16,4 +16,19 @@ class User(AbstractUser):
             return str(self.username)
         return str(self.first_name) + ' ' + str(self.last_name)
 
+    class Meta:
+        db_table = "Users"
+
+class UserPost(models.Model):
+    content = models.TextField(blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    likes = models.IntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        db_table = "UserPosts"
+
 
